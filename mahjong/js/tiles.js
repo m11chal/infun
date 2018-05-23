@@ -42,6 +42,7 @@ function TileDeck() {
                 }
             }
         });
+        console.log("Tile list:");
 		console.log(self.tile_list);
     }
 

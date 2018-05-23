@@ -1,20 +1,47 @@
-<html>
+    <html>
 <head>
     <meta charset="UTF-8"> 
 </head>
 
 <body>
     <!-- Scripts, so many scripts -->
-    <script src="src/board.js"       ></script>
-    <script src="src/interface.js"   ></script>
-    <script src="src/bezier_curwe.js"></script>
-    <script src="src/animations.js"  ></script>
-    <script src="src/drawer.js"      ></script>
-    <script src="src/formations.js"  ></script>
-    <script src="src/tiles.js"       ></script>
-    <script src="src/game.js"        ></script>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var config = {age: 20};
+        xhr.open('GET', '/mahjong/config', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                var json = xhr.responseText;
+                config = JSON.parse(json);
+            }
+        };
+        xhr.send(null);
+
+        function sendResult(score) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/game/end', true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            //send result to server
+            xhr.send(JSON.stringify({result: score, group: config.group, nick: config.nick, age: config.age}));
+            xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                window.location.replace(xhr.responseText);
+            }
+            }
+        }
+    </script>
+    <script src="js/board.js"       ></script>
+    <script src="js/interface.js"   ></script>
+    <script src="js/bezier_curwe.js"></script>
+    <script src="js/animations.js"  ></script>
+    <script src="js/drawer.js"      ></script>
+    <script src="js/formations.js"  ></script>
+    <script src="js/tiles.js"       ></script>
+    <script src="js/game.js"        ></script>
     <script>
     window.onload = function() {
+        console.log(config);
+
         let MENU = 0;
         let GAME = 1;
         let LOSE = 2;
@@ -54,8 +81,11 @@
         lose_interface.addWidget(new DynamicText({x: 600, y:550}, '40px Comic Sans MS', () => {
             return 'score: ' + game.board.score;
         }));
-        lose_interface.addButton(new Button({x: 450, y:600, width: 300, height: 80}, 'Back to menu', function() {
+        lose_interface.addButton(new Button({x: 450, y:600, width: 300, height: 80}, 'Next task', function() {
             console.log('Back to menu pressed.');
+
+            sendResult(0);
+            return;
 
             // Change state back to menu
             state = MENU;
@@ -67,8 +97,11 @@
         win_interface.addWidget(new DynamicText({x: 500, y:400}, '70px Comic Sans MS', () => {
             return 'score: ' + game.board.score;
         }));
-        win_interface.addButton(new Button({x: 450, y:600, width: 300, height: 80}, 'Back to menu', function() {
+        win_interface.addButton(new Button({x: 450, y:600, width: 300, height: 80}, 'Next task', function() {
             console.log('Back to menu pressed.');
+
+            sendResult(1);
+            return;
 
             // Change state back to menu
             state = MENU;
@@ -166,8 +199,11 @@
     </script>
 
     <!-- Main body of the page -->
-    <img id="tiles" width="0" height="0" src="graphics/mahjong_tiles.png">
-    <img id="bg" width="0" heigh="0" src="graphics/mahjong_bg.png">
+    <img id="tiles" width="0" height="0" src="img/mahjong_tiles.png">
+    <img id="bg" width="0" heigh="0" src="img/mahjong_bg.png">
+    <p style="margin: auto; text-align: center">
+    Wybierz parę jednakowych płytek z planszy do usunięcia. Płytki nie mogą być blokowane z góry ani wzdłuż dłuższych boków.
+    </p>
     <canvas id="canvas" width="1200" height="800" style="border:2px solid #d3d3d3;">
     Your browser does not support the HTML5 canvas tag.
     </canvas>
