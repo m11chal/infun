@@ -160,15 +160,15 @@ var init = function() {
 		onShapeReady();
 		$('#movesFinished').hide();
 	});
-	$('#changeLevel').click(function() {
-		presenter.game.swicthToNextLevel();
-		onShapeReady();
-		$('#error').hide();
-		$('#level').hide();
-		$('#finish').hide();
-		$('#container').show();
-		$('.resetLevel').show();
-	});
+	// $('#changeLevel').click(function() {
+	// 	presenter.game.swicthToNextLevel();
+	// 	onShapeReady();
+	// 	$('#error').hide();
+	// 	$('#level').hide();
+	// 	$('#finish').hide();
+	// 	$('#container').show();
+	// 	$('.resetLevel').show();
+	// });
 };
 
 $(window).load(init);
