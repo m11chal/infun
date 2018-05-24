@@ -2,17 +2,17 @@
 <html>
 <head>
     <title>Euler path</title>
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/shapes.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/game.css">
+    <script src="js/euler-path/js/jquery-1.11.1.min.js"></script>
+    <script src="js/euler-path/js/game.js"></script>
+    <script src="js/euler-path/js/script.js"></script>
+    <script src="js/euler-path/js/shapes.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/euler-path/css/game.css">
 </head>
 <body>
     <script>
         var xhr = new XMLHttpRequest();
         var config = {age: 20};
-        xhr.open('GET', '/mahjong/config', true);
+        xhr.open('GET', '/euler-path/config', true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 var json = xhr.responseText;
