@@ -20,7 +20,7 @@ var performAction = function(info, id) {
 
 var onShapeReady = function(shape) {
 	var container = $('#container');
-	var svgHTML = '<svg width="400" height="400">';
+	var svgHTML = '<svg width="500" height="400">';
 	var visitor = {};
 	visitor.renderEdge = function(edge) {
 		var lineHTML = '<line id="ID" x1="X1" y1="Y1" x2="X2" y2="Y2"/>';
@@ -28,7 +28,7 @@ var onShapeReady = function(shape) {
 		svgHTML += lineHTML;
 	};
 	visitor.renderNode = function(node) {
-		var circleHTML = '<circle id="ID" cx="CX" cy="CY" r="15" stroke="black" stroke-width="3" fill="skyblue"/>';
+		var circleHTML = '<circle id="ID" cx="CX" cy="CY" r="30" stroke="black" stroke-width="3" fill="skyblue"/>';
 		circleHTML = circleHTML.replace('ID', node.id).replace('CX', node.x).replace('CY', node.y);
 		svgHTML += circleHTML;
 	};
@@ -109,19 +109,19 @@ var showErrorMessage = function(message) {
 
 
 presenter.onStartNodeAlreadySelected = function(nodeID) {
-	showErrorMessage('You have to select a edge to continue the game.');
+	// showErrorMessage('You have to select a edge to continue the game.');
 };
 
 presenter.onNonAdjacentVisit = function() {
-	showErrorMessage('You can only select the edge which is adjacent to current node.');
+	// showErrorMessage('You can only select the edge which is adjacent to current node.');
 };
 
 presenter.onStartNodeNotSelected = function() {
-	showErrorMessage('You need select a node to start the game.');
+	// showErrorMessage('You need select a node to start the game.');
 };
 
 presenter.onEdgeRevisit = function() {
-	showErrorMessage('This edge has been already visited.');
+	// showErrorMessage('This edge has been already visited.');
 };
 
 presenter.onNoPossibleMoves = function(edgeID, info) {

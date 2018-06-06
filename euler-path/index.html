@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Euler path</title>
+    <title>Ścieżka Eulera</title>
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/game.js"></script>
     <script src="js/script.js"></script>
@@ -37,30 +37,26 @@
     </script>
     <p style="margin: auto; text-align: center; padding: 20px">Wybierz punkt początkowy, a następnie kolejne krawędzie, tak aby pokryć cały graf. Każdą krawędź można wybrać tylko raz.</p>
     <div id="main">
-        <div id="progress">
-        </div>
         <div id="movesFinished">
-            <h2>There are no possible moves, Please restart Level!</h2>
-            <button class="myButton resetLevel" >Restart Level</button>
+            <h2>Brak ruchów!</h2>
+            <button class="myButton resetLevel" >Restart</button>
         </div>
         <div id="level" class="notify">
-            <h2>Congrats! Task finished.</h2>
-            <button id="changeLevel" onclick="sendResult(1)">Next task</button>
+            <h2>Gratulacje! Zadanie ukończone.</h2>
+            <button id="changeLevel" onclick="sendResult(1)">Następne zadanie</button>
         </div>        
         <div id="finish" class="notify">
             <h1>Congratulations! You Win.</h1>
         </div>        
-        <div id="container"></div>        
+        <div id="container"></div> 
+        <div style="margin: 30px auto;">
+            <button class="myButton resetLevel">Restart</button>    
+        </div>          
         <div id="error">
             <div id="errorMsg">
                 <h2></h2>
             </div>
-        </div>
-        <div>
-            <button class="myButton resetLevel">Restart Level</button>    
-        </div>        
-
+        </div>     
     </div>
-    <h6>Photo Credit:- <a target="_blank" href="http://www.dreamstime.com/">Dreams Times</a></h6>
 </body>
 </html>

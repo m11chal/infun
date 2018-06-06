@@ -40,7 +40,7 @@ background-color:#5cbf2a;
 }
 line{
 	stroke:rgb(0,0,0);
-	stroke-width:15;
+	stroke-width:20;
 }
 .visited{
 	stroke: rgb(0,200,0);
@@ -64,23 +64,18 @@ line{
 }
 
 #main{
+	background-color: rgba(248, 235, 193, 0.842);
 	margin: 0 auto;
-	background: url('../img/back.jpg');
-	width: 1024px;
-	height: 720px;
+	width: 800px;
 	border: 2px solid;
+	text-align: center;
 }
 
 #container{
-	position: absolute;
-	margin-left: 19%;
-	top: 30%;
+	margin: 30px auto;
 }
 
 .myButton {
-	position: absolute;
-	top: 60%;
-
 	background-color:#18ab29;
 	-moz-border-radius:28px;
 	-webkit-border-radius:28px;
@@ -164,7 +159,7 @@ line{
 
 @media (max-width: 1440px) {
 	#container{
-		margin-left: 24%;
+		/* margin-left: 24%; */
 	}		
 	#error {
 		margin-left: 65%;
@@ -173,7 +168,7 @@ line{
 
 @media (max-width: 1280px) {
 	#container{
-		margin-left: 28%;
+		/* margin-left: 28%; */
 	}
 	#error {
 		margin-left: 65%;

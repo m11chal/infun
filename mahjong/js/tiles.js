@@ -1,12 +1,12 @@
 const CORE_SYMBOLS = {
-    BAMBOOS   : [0, 1, 9],
-    CHARACTERS: [0, 3, 9],
-    CIRCLES   : [0, 5, 9],
-    WINDS     : [0, 11, 4],
-    DRAGONS   : [0, 13, 3],
+    BAMBOOS   : [0, 1, 5],
+    //CHARACTERS: [0, 3, 9],
+    //CIRCLES   : [0, 5, 9],
+    //WINDS     : [0, 11, 4],
+    //DRAGONS   : [0, 13, 3],
 };
 const EXTENDED_SYMBOLS = {  
-    SEASONS   : [0, 7, 4],
+    SEASONS   : [0, 7, 2],
     FLOWERS   : [0, 9, 4],   
 };
 
@@ -22,7 +22,7 @@ function TileDeck() {
         self._addSymbolCollection(CORE_SYMBOLS, 4);
 
         // If extended, also add the extended tiles
-        if (extended) {
+        if (false && extended) {
             self._addSymbolCollection(EXTENDED_SYMBOLS, 1);
         }
 
