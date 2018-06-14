@@ -1,3 +1,8 @@
+body{
+	font-family: Tahoma;
+	font-size: 24px;
+}
+
 .instruction{
 	margin: 0 auto;
 	text-align: center;
@@ -39,8 +44,8 @@ background-color:#5cbf2a;
 	color: black;
 }
 line{
-	stroke:rgb(0,0,0);
-	stroke-width:20;
+	stroke: #404040;
+	stroke-width:30;
 }
 .visited{
 	stroke: rgb(0,200,0);
@@ -64,7 +69,7 @@ line{
 }
 
 #main{
-	background-color: rgba(248, 235, 193, 0.842);
+	background-color: #fafae4;
 	margin: 0 auto;
 	width: 800px;
 	border: 2px solid;
@@ -84,8 +89,8 @@ line{
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:arial;
-	font-size:17px;
+	font-family:Tahoma;
+	font-size:30px;
 	padding:16px 31px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;

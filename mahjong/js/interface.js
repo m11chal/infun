@@ -59,7 +59,7 @@ function Button(box, label, onClick) {
         context.fillStyle = '#DBA852';
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.font = '40px Comic Sans MS';
+        context.font = '40px Tahoma';
         context.fillText(self.label, self.box.x + self.box.width / 2, self.box.y + self.box.height / 2 + 4);
     }
 }

@@ -18,7 +18,7 @@ function Drawer(canvas, context, bg, tileset, tile_size, actual_size, canvas_siz
 
     this.clear = function() {
         self.context.clearRect(0, 0, self.canvas.width, canvas.height);
-        self.context.drawImage(self.bg, 0, 0, self.canvas.width, self.canvas.height);
+        //self.context.drawImage(self.bg, 0, 0, self.canvas.width, self.canvas.height);
     }
 
     this.drawTile = function(tile, bounding_box) {  

@@ -1,9 +1,9 @@
 const CORE_SYMBOLS = {
-    BAMBOOS   : [0, 1, 5],
-    //CHARACTERS: [0, 3, 9],
-    //CIRCLES   : [0, 5, 9],
-    //WINDS     : [0, 11, 4],
-    //DRAGONS   : [0, 13, 3],
+    BAMBOOS   : [0, 1, 6],
+    CHARACTERS: [0, 3, 6],
+    CIRCLES   : [0, 5, 6],
+    // WINDS     : [0, 11, 6],
+    // DRAGONS   : [0, 13, 6],
 };
 const EXTENDED_SYMBOLS = {  
     SEASONS   : [0, 7, 2],
@@ -19,7 +19,9 @@ function TileDeck() {
         self.tile_list.length = 0;
 
         // Add core tiles
-        self._addSymbolCollection(CORE_SYMBOLS, 4);
+        var keys = Object.keys(CORE_SYMBOLS)
+        var symbols = {a: CORE_SYMBOLS[keys[ keys.length * Math.random() << 0]]};
+        self._addSymbolCollection(symbols, 4);
 
         // If extended, also add the extended tiles
         if (false && extended) {
@@ -39,6 +41,13 @@ function TileDeck() {
             for (let t = 0; t < symbol_set[2]; t++) {
                 for (let c = 0; c < copies; c++) {
                     self.tile_list.push(new Tile(symbol_set[0] + t, symbol_set[1]));
+                }
+            }
+            if(config.age > 4){
+                for(let i = 0 ; i < config.age - 4 && i < 10; i++){
+                    var ind = Math.floor(Math.random() * symbol_set[2]);
+                    self.tile_list.push (new Tile(symbol_set[0] + ind, symbol_set[1]));
+                    self.tile_list.push (new Tile(symbol_set[0] + ind, symbol_set[1]));
                 }
             }
         });

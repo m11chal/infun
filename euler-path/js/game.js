@@ -64,8 +64,22 @@ var createShape = function(game) {
 
 var Game = function(shapesData) {
 	// var shapesData = [];
+	console.log(config);
 	this.level = 1;
-	this.shapesData = shapesData || x; // || [shapeData1, shapeData2, shapeData3];
+	if(config.age < 6){
+		shape = x[0];
+	} else if (config.age < 11){
+		shape = x[1];
+	} else if (config.age < 16){
+		shape = x[2];
+	} else if (config.age < 21){
+		shape = x[3];
+	} else {
+		shape = x[4];
+	}
+	
+	this.shapesData = shapesData || shape; // || [shapeData1, shapeData2, shapeData3];
+	this.shapesData = [this.shapesData[Math.floor(Math.random() * this.shapesData.length)]]
 	this.noOfLevels = this.shapesData.length;
 	createShape(this);
 };
@@ -99,6 +113,8 @@ Game.prototype.selectNode = function(nodeId) {
 			statusCode: 301
 		};
 	}
+	// Select edge
+	
 	return {
 		statusCode: 401
 	};

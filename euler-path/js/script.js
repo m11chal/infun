@@ -20,15 +20,15 @@ var performAction = function(info, id) {
 
 var onShapeReady = function(shape) {
 	var container = $('#container');
-	var svgHTML = '<svg width="500" height="400">';
+	var svgHTML = '<svg width="800" height="1000">';
 	var visitor = {};
 	visitor.renderEdge = function(edge) {
-		var lineHTML = '<line id="ID" x1="X1" y1="Y1" x2="X2" y2="Y2"/>';
+		var lineHTML = '<line id="ID" x1="X1" y1="Y1" x2="X2" y2="Y2" />';
 		lineHTML = lineHTML.replace('ID', edge.id).replace('X1', edge.startNode.x).replace('Y1', edge.startNode.y).replace('X2', edge.endNode.x).replace('Y2', edge.endNode.y);
 		svgHTML += lineHTML;
 	};
 	visitor.renderNode = function(node) {
-		var circleHTML = '<circle id="ID" cx="CX" cy="CY" r="30" stroke="black" stroke-width="3" fill="skyblue"/>';
+		var circleHTML = '<circle id="ID" cx="CX" cy="CY" r="40" stroke-width="3" fill="#0066CC"/>';
 		circleHTML = circleHTML.replace('ID', node.id).replace('CX', node.x).replace('CY', node.y);
 		svgHTML += circleHTML;
 	};
@@ -57,20 +57,35 @@ presenter.onEdgeVisited = function(edgeID, info) {
 
 presenter.onNodeSelected = function(nodeID) {
 	var circles = $('circle');
-	circles.attr('fill', 'skyblue');
-	$('#' + nodeID).attr('fill', 'pink');
+	circles.attr('fill', '#0066CC');
+	$('#' + nodeID).attr('fill', '#CC0000');
 };
+
+function sendResult(score) {
+	console.log("send result " + score);
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/euler-path/end', true);
+	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	//send result to server
+	xhr.send(JSON.stringify({result: score, group: config.group, nick: config.nick, age: config.age}));
+	xhr.onreadystatechange = function() {
+	if (xhr.readyState == XMLHttpRequest.DONE) {
+		window.location.replace(xhr.responseText);
+	}
+	}
+}
 
 presenter.onLevelComplete = function(edgeID, info) {
 	presenter.onEdgeVisited(edgeID, info);
-	setTimeout(function() {
-		$('#error').hide();
-		$('#container').hide();
-		$('#finish').hide();
-		$('#level').show();
-		$('#instruction').hide();
-		$('.resetLevel').hide();
-	}, 500);
+	sendResult(1);
+	// setTimeout(function() {
+	// 	$('#error').hide();
+	// 	$('#container').hide();
+	// 	$('#finish').hide();
+	// 	$('#level').show();
+	// 	$('#instruction').hide();
+	// 	$('.resetLevel').hide();
+	// }, 500);
 };
 
 var showErrorMessage = function(message) {
@@ -126,34 +141,52 @@ presenter.onEdgeRevisit = function() {
 
 presenter.onNoPossibleMoves = function(edgeID, info) {
 	presenter.onEdgeVisited(edgeID, info);
-	setTimeout(function() {
-		$('#movesFinished').show();
-		$('circle').prop('disabled', true);
-		$('line').prop('disabled', true);
-	}, 500);
+	// setTimeout(function() {
+	// 	$('#movesFinished').show();
+	// 	$('circle').prop('disabled', true);
+	// 	$('line').prop('disabled', true);
+	// }, 500);
 };
 
 presenter.onGameFinished = function() {
-	$('#container').hide();
-	$('#error').hide();
-	$('#level').hide();
-	$('.resetLevel').hide();
-	$('#finish').show();
-	$('#progress').hide();
+	sendResult(1);
+	// $('#container').hide();
+	// $('#error').hide();
+	// $('#level').hide();
+	// $('.resetLevel').hide();
+	// $('#finish').show();
+	// $('#progress').hide();
 };
 
 var init = function() {
 	presenter.game = new Game();
 	onShapeReady();
-	$('#container').on('click', 'line', function() {
-		var edgeID = $(this).attr('id');
-		var info = presenter.game.visitEdge(edgeID);
-		performAction(info, edgeID);
-	});
+	// $('#container').on('click', 'line', function() {
+	// 	var edgeID = $(this).attr('id');
+	// 	var info = presenter.game.visitEdge(edgeID);
+	// 	performAction(info, edgeID);
+	// });
 	$('#container').on('click', 'circle', function() {
 		var nodeID = $(this).attr('id');
 		var info = presenter.game.selectNode(nodeID);
 		performAction(info, nodeID);
+		if(presenter.game.currentNode){
+			for(i = 0; i < presenter.game.currentNode.edges.length; i++){
+				var edge = presenter.game.currentNode.edges[i];
+				if(!edge.visited){
+					if(edge.endNode.id == nodeID && edge.startNode.id == presenter.game.currentNode.id){
+						console.log(edge.id);
+						var info = presenter.game.visitEdge(edge.id);
+						performAction(info, edge.id);
+					}
+					if(edge.endNode.id == presenter.game.currentNode.id && edge.startNode.id == nodeID){
+						console.log(edge.id);
+						var info = presenter.game.visitEdge(edge.id);
+						performAction(info, edge.id);
+					}
+				}
+			}
+		}
 	});
 	$('.resetLevel').click(function() {
 		presenter.game.restartLevel();

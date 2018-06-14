@@ -11,7 +11,7 @@
 <body>
     <script>
         var xhr = new XMLHttpRequest();
-        var config = {age: 20};
+        var config = {age: 21};
         xhr.open('GET', '/euler-path/config', true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -24,7 +24,7 @@
         function sendResult(score) {
             console.log("send result " + score);
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/game/end', true);
+            xhr.open('POST', '/euler-path/end', true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             //send result to server
             xhr.send(JSON.stringify({result: score, group: config.group, nick: config.nick, age: config.age}));
@@ -35,7 +35,7 @@
             }
         }
     </script>
-    <p style="margin: auto; text-align: center; padding: 20px">Wybierz punkt początkowy, a następnie kolejne krawędzie, tak aby pokryć cały graf. Każdą krawędź można wybrać tylko raz.</p>
+    <p style="margin: auto; text-align: center; padding: 30px">Wybierz punkt początkowy, a następnie kolejne węzły, tak aby pokryć cały graf. Każdą krawędź można wybrać tylko raz.</p>
     <div id="main">
         <div id="movesFinished">
             <h2>Brak ruchów!</h2>
